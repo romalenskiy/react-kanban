@@ -1,8 +1,15 @@
 import React from 'react'
 
+import Lane from '../Lane'
+
 function App() {
   return (
-    <div className="app">Hello World!</div>
+    <div className="row app">
+      <Lane />
+      <Lane />
+      <Lane />
+      <Lane />
+    </div>
   )
 }
 

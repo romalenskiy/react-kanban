@@ -2,8 +2,105 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap&subset=cyrillic');
 
 // =================
+// Variables
+// =================
+$background-primary: #DFE3E6;
+$background-secondary: #FFFFFF;
+
+$text-primary: #000000;
+$text-secondary: #6B808C;
+
+// =================
+// General
+// =================
+html {
+  font-size: 13px;
+}
+
+// =================
+// Grid
+// =================
+.row, .column {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+  min-height: 0;
+}
+
+// =================
 // App
 // =================
 .app {
+  align-items: flex-start;
+  height: 100vh;
+  padding: 1.5rem;
   font-family: Montserrat, Arial, Helvetica, sans-serif;
+  line-height: 1.5rem;
+  background-image: url(./assets/img/background.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+// =================
+// Lane
+// =================
+.lane {
+  flex: 1 1 0;
+  max-width: 25%;
+  margin-right: 1rem;
+  border-radius: 0.25rem;
+  background-color: $background-primary;
+  max-height: 100%;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.lane__header {
+  padding: 0.6rem 1rem 0 1rem;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  font-weight: bold;
+  color: $text-primary;
+}
+
+.lane__body {
+  padding: 0 1rem;
+  overflow-y: auto;
+  color: $text-primary
+}
+
+.lane__footer {
+  padding: 1rem;
+  color: $text-secondary;
+}
+
+// =================
+// Task
+// =================
+.task {
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.6rem;
+  background-color: $background-secondary;
+  box-shadow: 0px 1px 4px rgba(9, 45, 66, 0.25);
+  border-radius: 0.25rem;
+  word-wrap: break-word;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+// =================
+// New task
+// =================
+.new-task__icon {
+  margin-right: 0.6rem;
 }
