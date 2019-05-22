@@ -1,31 +1,32 @@
 import React from 'react'
 
-import Task from '../Task'
-import plusIcon from '../../assets/img/plusIcon.svg'
+import Card from '../Card'
+import AddNew from '../AddNew'
 
-function Lane() {
+function Lane({ name }) {
   return (
     <div className="column lane">
-      <div className="lane__header">New lane</div>
+      <div className="lane__header">{name}</div>
 
       <div className="lane__body">
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+
       </div>
 
       <div className="lane__footer">
-        <div className="row new-task">
-          <img className="new-task__icon" src={plusIcon} alt="New task" />
-          <div className="new-task__text">Добавить еще одну карточку</div>
-        </div>
+        <AddNew type="card" />
       </div>
     </div>
   )

@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Task() {
+function Card() {
   return (
-    <div className="task">
+    <div className="card">
       Sample text
     </div>
   )
 }
 
-export default Task
+export default Card

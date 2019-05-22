@@ -9,12 +9,32 @@ $background-secondary: #FFFFFF;
 
 $text-primary: #000000;
 $text-secondary: #6B808C;
+$text-placeholder: #B8B9BB;
+$text-button-primary: #FFFFFF;
+
+$button-primary: #39C071;
+
+$border-radius-primary: 0.25rem;
 
 // =================
 // General
 // =================
 html {
   font-size: 13px;
+}
+
+.button, .input {
+	border: none;
+	outline: none;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.button {
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 // =================
@@ -54,7 +74,7 @@ html {
   flex: 1 1 0;
   max-width: 25%;
   margin-right: 1rem;
-  border-radius: 0.25rem;
+  border-radius: $border-radius-primary;
   background-color: $background-primary;
   max-height: 100%;
 
@@ -77,20 +97,15 @@ html {
   color: $text-primary
 }
 
-.lane__footer {
-  padding: 1rem;
-  color: $text-secondary;
-}
-
 // =================
-// Task
+// Card
 // =================
-.task {
+.card {
   padding: 0.6rem 1rem;
   margin-bottom: 0.6rem;
   background-color: $background-secondary;
   box-shadow: 0px 1px 4px rgba(9, 45, 66, 0.25);
-  border-radius: 0.25rem;
+  border-radius: $border-radius-primary;
   word-wrap: break-word;
 
   &:last-of-type {
@@ -99,8 +114,39 @@ html {
 }
 
 // =================
-// New task
+// Add new element
 // =================
-.new-task__icon {
+.add-new {
+  padding: 1rem;
+  border-radius: $border-radius-primary;
+  color: $text-secondary;
+  background-color: $background-primary;
+}
+
+.add-new_lane {
+  flex: 1 1;
+  max-width: 25%;
+}
+
+.add-new__input {
+  &::placeholder {
+    color: $text-placeholder;
+  }
+}
+
+.add-new__buttons {
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+
+.add-new__icon-add {
   margin-right: 0.6rem;
+}
+
+.add-new__button {
+  padding: 0.5rem 0.6rem;
+  border-radius: $border-radius-primary;
+  background-color: $button-primary;
+  font-weight: bold;
+  color: $text-button-primary;
 }
