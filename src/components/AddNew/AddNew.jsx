@@ -39,8 +39,8 @@ function AddNew({ type, onAdd }) {
   return (
     isAdding
       ? (
-        <div className={`column add-new add-new_${type}`}>
-          <input className="input add-new__input card" type="text" placeholder={`Введите название ${laneOrCardGenitive}`} value={value} onChange={onInputChange} onKeyDown={onInputKeyDown} autoFocus />
+        <div className={`column add-new add-new_${type} add-new__form`}>
+          <input className="box input add-new__input" type="text" placeholder={`Введите название ${laneOrCardGenitive}`} value={value} onChange={onInputChange} onKeyDown={onInputKeyDown} autoFocus />
           <div className="row add-new__buttons">
             <button className="button add-new__button" type="button" disabled={!isValueValid} onClick={onAddNewFinish}>{`Добавить ${laneOrCardAccusative}`}</button>
             <img className="add-new__icon-cross" src={crossIcon} alt="Close" onClick={onAddNewClose} />
@@ -49,7 +49,7 @@ function AddNew({ type, onAdd }) {
       )
 
       : (
-        <div className={`row add-new add-new_${type}`} onClick={onAddNewClick}>
+        <div className={`row add-new add-new_${type} add-new__placeholder-${type}`} onClick={onAddNewClick}>
           <img className="add-new__icon-add" src={plusIcon} alt={`New ${type}`} />
           <div className="add-new__text">{`Добавить еще одну ${laneOrCardAccusative}`}</div>
         </div>
