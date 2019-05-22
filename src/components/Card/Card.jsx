@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Card() {
+function Card({ task }) {
   return (
     <div className="box card">
-      Sample text
+      {task}
     </div>
   )
 }

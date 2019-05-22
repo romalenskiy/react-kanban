@@ -20,6 +20,7 @@ function AddNew({ type, onAdd }) {
 
   function onAddNewFinish() {
     if (!isValueValid) return
+
     onAdd(value)
     onAddNewClose()
   }
