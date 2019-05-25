@@ -30,18 +30,44 @@ function AddNew({ type, onAdd }) {
   }
 
   function onInputKeyDown(e) {
-    if (e.key === 'Enter') { onAddNewFinish() }
-    if (e.key === 'Escape' || e.key === 'Esc') { onAddNewClose() }
+    const { key, shiftKey } = e
+
+    switch (true) {
+      case (shiftKey && key === 'Enter'): {
+        break
+      }
+
+      case (key === 'Enter'): {
+        onAddNewFinish()
+        break
+      }
+
+      case (key === 'Escape' || key === 'Esc'): {
+        onAddNewClose()
+        break
+      }
+
+      default:
+        break
+    }
   }
 
   const laneOrCardAccusative = type === 'lane' ? 'колонку' : 'карточку'
   const laneOrCardGenitive = type === 'lane' ? 'колонки' : 'карточки'
 
+  const textFieldProps = {
+    placeholder: `Введите название ${laneOrCardGenitive}`,
+    value,
+    onChange: onInputChange,
+    onKeyDown: onInputKeyDown,
+    autoFocus: true,
+  }
+
   return (
     isAdding
       ? (
         <div className={`column add-new add-new_${type} add-new__form`}>
-          <input className="box input add-new__input" type="text" placeholder={`Введите название ${laneOrCardGenitive}`} value={value} onChange={onInputChange} onKeyDown={onInputKeyDown} autoFocus />
+          {type === 'lane' ? <input className="box input add-new__input" type="text" {...textFieldProps} /> : <textarea className="box textarea add-new__textarea" rows="2" {...textFieldProps} />}
           <div className="row add-new__buttons">
             <button className="button add-new__button" type="button" disabled={!isValueValid} onClick={onAddNewFinish}>{`Добавить ${laneOrCardAccusative}`}</button>
             <img className="add-new__icon-cross" src={crossIcon} alt="Close" onClick={onAddNewClose} />

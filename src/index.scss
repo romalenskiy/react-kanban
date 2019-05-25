@@ -23,7 +23,7 @@ html {
   font-size: 13px;
 }
 
-.button, .input {
+.button, .input, .textarea {
 	border: none;
 	outline: none;
   font-family: inherit;
@@ -112,6 +112,7 @@ html {
 .card {
   margin-bottom: 0.6rem;
   word-wrap: break-word;
+  white-space: pre-line;
 
   &:first-of-type {
     margin-top: 0.5rem;
@@ -141,12 +142,16 @@ html {
   margin-top: 0.4rem;
 }
 
-.add-new__input {
+.add-new__input, .add-new__textarea {
   margin-bottom: 0.6rem;
 
   &::placeholder {
     color: $text-placeholder;
   }
+}
+
+.add-new__textarea {
+  resize: none;
 }
 
 .add-new__buttons {
