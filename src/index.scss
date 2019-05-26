@@ -12,6 +12,8 @@ $text-secondary: #6B808C;
 $text-placeholder: #B8B9BB;
 $text-button-primary: #FFFFFF;
 
+$dragging-placeholder: #C9D2D9;
+
 $button-primary: #39C071;
 
 $border-radius-primary: 0.25rem;
@@ -117,6 +119,12 @@ html {
   &:first-of-type {
     margin-top: 0.5rem;
   }
+}
+
+.card_dragging {
+  background-color: $dragging-placeholder;
+  color: $dragging-placeholder;
+  box-shadow: none;
 }
 
 // =================

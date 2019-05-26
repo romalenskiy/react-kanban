@@ -25,11 +25,28 @@ function App() {
     setLanes(updatedLanes)
   }
 
+  function onCardMove(laneId, firstCardIndex, secondCardIndex) {
+    const updatedLanes = lanes.map((lane) => {
+      if (lane.id === laneId) {
+        const firstCard = lane.cards[firstCardIndex]
+        const secondCard = lane.cards[secondCardIndex]
+        const updatedCards = [...lane.cards]
+        updatedCards.splice(firstCardIndex, 1, secondCard)
+        updatedCards.splice(secondCardIndex, 1, firstCard)
+
+        return { ...lane, cards: updatedCards }
+      }
+      return lane
+    })
+
+    setLanes(updatedLanes)
+  }
+
   return (
     <div className="row app">
       {Boolean(lanes.length) && lanes.map((lane) => {
         const { id, name, cards } = lane
-        return <Lane key={id} name={name} cards={cards} onNewCardAdd={onNewCardAdd.bind(null, id)} />
+        return <Lane key={id} laneId={id} name={name} cards={cards} onNewCardAdd={onNewCardAdd.bind(null, id)} onCardMove={onCardMove} />
       })}
 
       <AddNew type="lane" onAdd={onNewLaneAdd} />
