@@ -5,7 +5,7 @@ import useControlledInput from '../../customHooks/useControlledInput'
 import plusIcon from '../../assets/img/plusIcon.svg'
 import crossIcon from '../../assets/img/crossIcon.svg'
 
-function AddNew({ type, onAdd }) {
+function AddNew({ type, laneId, onAdd }) {
   const [value, setValue, isValueValid] = useControlledInput()
   const [isAdding, setIsAdding] = useState(false)
 
@@ -21,7 +21,7 @@ function AddNew({ type, onAdd }) {
   function onAddNewFinish() {
     if (!isValueValid) return
 
-    onAdd(value)
+    onAdd(value, laneId)
     onAddNewClose()
   }
 

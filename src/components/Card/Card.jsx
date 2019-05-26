@@ -1,84 +1,54 @@
-import React, { useRef, useImperativeHandle } from 'react'
+import React, { useRef } from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
 import { ItemTypes } from '../../constants'
 
-const Card = React.forwardRef(
-  (props, ref) => {
-    const { task, connectDragSource, isDragging, connectDropTarget } = props
+function Card(props) {
+  const { task, connectDragSource, isDragging, connectDropTarget, isOver } = props
 
-    const cardRef = useRef()
-    // Assign the drag source role to a node
-    connectDragSource(cardRef)
-    // Assign the drop target role to a node
-    connectDropTarget(cardRef)
-    // Customize the instance value that is exposed to parent components when using ref
-    useImperativeHandle(ref, () => ({
-      getNode: () => cardRef.current,
-    }))
+  const cardRef = useRef()
+  // Assign the drag source role to a node
+  connectDragSource(cardRef)
+  // Assign the drop target role to a node
+  connectDropTarget(cardRef)
 
-    let cardClass = 'box card'
-    if (isDragging) { cardClass += ' card_dragging' }
+  let cardClass = 'box card'
+  if (isDragging || isOver) { cardClass += ' card_dragging' }
 
-    return (
-      <div className={cardClass} ref={cardRef}>
-        {task}
-      </div>
-    )
-  },
-)
+  return (
+    <div className={cardClass} ref={cardRef}>
+      {task}
+    </div>
+  )
+}
 
 // Handling drop
 const dropSpec = {
-  hover(props, monitor, component) {
-    const { laneId, cardIndex, onCardMove } = props
+  hover(props, monitor) {
+    const { cardId, onCardMove } = props
+    const sourceCardId = monitor.getItem().cardId
+    const targetCardId = cardId
 
-    if (!component) return null
 
-    // node = HTML Div element from imperative API
-    const node = component.getNode()
-    if (!node) return null
-
-    // Don't replace items with themselves
-    const dragCardIndex = monitor.getItem().cardIndex
-    const hoverCardIndex = cardIndex
-    if (dragCardIndex === hoverCardIndex) return null
-
-    // Determine rectangle on user screen
-    const hoverBoundingRect = node.getBoundingClientRect()
-    // Get half of height
-    const hoverHeightHalf = hoverBoundingRect.height / 2
-
-    // Determine mouse position
-    const cursorOffset = monitor.getClientOffset()
-
-    // Distance from cursor to top bound of hover component
-    const hoverCursorDistance = cursorOffset.y - hoverBoundingRect.top
-
-    // Only perform the move when the mouse has crossed half of the items height:
-    // Dragging downwards. Only move when the cursor is below 50%
-    if (dragCardIndex < hoverCardIndex && hoverCursorDistance < hoverHeightHalf) return null
-    // Dragging upwards. Only move when the cursor is above 50%
-    if (dragCardIndex > hoverCardIndex && hoverCursorDistance > hoverHeightHalf) return null
+    if (sourceCardId === targetCardId) return
 
     // Perform the move
-    onCardMove(laneId, dragCardIndex, hoverCardIndex)
-
-    monitor.getItem().cardIndex = hoverCardIndex
+    onCardMove(sourceCardId, targetCardId)
   },
 }
 
-function dropCollect(connect) {
+function dropCollect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
   }
 }
 
 // Handling drag
 const dragSpec = {
   beginDrag(props) {
-    const { laneId, cardIndex } = props
-    return { laneId, cardIndex }
+    const { cardId } = props
+    return { cardId }
   },
 }
 
