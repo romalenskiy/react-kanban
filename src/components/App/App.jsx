@@ -5,7 +5,7 @@ import Lane from '../Lane'
 import AddNew from '../AddNew'
 
 function App() {
-  const [lanes, setLanes] = useState()
+  const [lanes, setLanes] = useState([])
 
   function onNewLaneAdd(name) {
     const id = uuidv4()
