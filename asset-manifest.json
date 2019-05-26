@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-kanban/static/css/main.3e8c4f86.chunk.css",
-    "main.js": "/react-kanban/static/js/main.9d5e244a.chunk.js",
-    "main.js.map": "/react-kanban/static/js/main.9d5e244a.chunk.js.map",
+    "main.js": "/react-kanban/static/js/main.3e7208e6.chunk.js",
+    "main.js.map": "/react-kanban/static/js/main.3e7208e6.chunk.js.map",
     "runtime~main.js": "/react-kanban/static/js/runtime~main.57763009.js",
     "runtime~main.js.map": "/react-kanban/static/js/runtime~main.57763009.js.map",
     "static/js/2.5fbf862b.chunk.js": "/react-kanban/static/js/2.5fbf862b.chunk.js",
     "static/js/2.5fbf862b.chunk.js.map": "/react-kanban/static/js/2.5fbf862b.chunk.js.map",
     "index.html": "/react-kanban/index.html",
-    "precache-manifest.01070f74928a78dea45ad0a3b25ea906.js": "/react-kanban/precache-manifest.01070f74928a78dea45ad0a3b25ea906.js",
+    "precache-manifest.af1ecf6cdf6798202352fb398a514479.js": "/react-kanban/precache-manifest.af1ecf6cdf6798202352fb398a514479.js",
     "service-worker.js": "/react-kanban/service-worker.js",
     "static/css/main.3e8c4f86.chunk.css.map": "/react-kanban/static/css/main.3e8c4f86.chunk.css.map",
     "static/media/index.scss": "/react-kanban/static/media/background.0225b339.jpg",
