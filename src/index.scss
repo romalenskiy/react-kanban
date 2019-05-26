@@ -94,7 +94,7 @@ html {
 
 .lane__header {
   padding: 0.6rem 1rem 0 1rem;
-  margin-bottom: 0.5rem;
+  // margin-bottom: 0.5rem;
   word-wrap: break-word;
   font-weight: bold;
   color: $text-primary;
@@ -102,7 +102,10 @@ html {
 
 .lane__body {
   padding: 0 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
   overflow-y: auto;
+  overflow-x: hidden;
   color: $text-primary
 }
 
@@ -139,7 +142,7 @@ html {
 }
 
 .add-new__placeholder-card {
-  margin-top: 0.4rem;
+  // margin-top: 0.4rem;
 }
 
 .add-new__input, .add-new__textarea {

@@ -1,10 +1,18 @@
 import React from 'react'
+import { Draggable } from 'react-beautiful-dnd'
 
-function Card({ task }) {
+function Card({ id, index, task }) {
   return (
-    <div className="box card">
-      {task}
-    </div>
+    <Draggable draggableId={id} index={index}>
+      {(provided, snapshot) => {
+
+        return (
+          <div className="box card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+            {task}
+          </div>
+        )
+      }}
+    </Draggable>
   )
 }
 
