@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import uuid from 'uuid/v4'
+
+import { doAddLane } from '../../action_creators/lanes'
+import { doAddCard } from '../../action_creators/cards'
 
 import useControlledInput from '../../customHooks/useControlledInput'
 
@@ -85,4 +90,12 @@ function AddNew({ type, laneId, onAdd }) {
   )
 }
 
-export default AddNew
+function mapDispatchToProps(dispatch, props) {
+  return {
+    onAdd: (value, laneId) => dispatch(props.type === 'lane' ? doAddLane(value) : doAddCard({ laneId, cardId: uuid(), task: value })),
+  }
+}
+
+const ConnectedAddNew = connect(null, mapDispatchToProps)(AddNew)
+
+export default ConnectedAddNew

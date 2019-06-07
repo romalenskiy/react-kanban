@@ -1,7 +1,9 @@
 import React, { useRef } from 'react'
+import { connect } from 'react-redux'
 import { DragSource, DropTarget } from 'react-dnd'
 
-import { ItemTypes } from '../../constants'
+import { doMoveCard } from '../../action_creators/lanes'
+import { ItemTypes } from '../../constants/dndTypes'
 
 function Card(props) {
   const { task, connectDragSource, isDragging, connectDropTarget, isOver } = props
@@ -44,7 +46,7 @@ function dropCollect(connect, monitor) {
   }
 }
 
-// Handling drag
+// Handling drag'n'drop
 const dragSpec = {
   beginDrag(props) {
     const { cardId } = props
@@ -59,4 +61,22 @@ function dragCollect(connect, monitor) {
   }
 }
 
-export default DropTarget(ItemTypes.CARD, dropSpec, dropCollect)(DragSource(ItemTypes.CARD, dragSpec, dragCollect)(Card))
+const DragSourceCard = DragSource(ItemTypes.CARD, dragSpec, dragCollect)(Card)
+const DropTargetCard = DropTarget(ItemTypes.CARD, dropSpec, dropCollect)(DragSourceCard)
+
+// Connecting redux
+function mapStateToProps(state, props) {
+  return {
+    task: state.cardState.entities[props.cardId].task,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onCardMove: (sourceCardId, targetCardId) => dispatch(doMoveCard(sourceCardId, targetCardId)),
+  }
+}
+
+const ConnectedCard = connect(mapStateToProps, mapDispatchToProps)(DropTargetCard)
+
+export default ConnectedCard

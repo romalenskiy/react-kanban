@@ -1,25 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { DropTarget } from 'react-dnd'
 
-import { ItemTypes } from '../../constants'
+import { doMoveCard } from '../../action_creators/lanes'
+import { ItemTypes } from '../../constants/dndTypes'
 
 import Card from '../Card'
 import AddNew from '../AddNew'
 
-function Lane({ lane, onNewCardAdd, onCardMove, connectDropTarget }) {
+function Lane({ lane, connectDropTarget }) {
   return connectDropTarget(
     <div className="column lane">
       <div className="lane__header">{lane.name}</div>
 
       <div className="lane__body">
-        {lane.cards.map((card) => {
-          const { id, task } = card
-          return <Card key={id} cardId={id} task={task} onCardMove={onCardMove} />
+        {lane.cardIds.map((cardId) => {
+          return <Card key={cardId} cardId={cardId} />
         })}
       </div>
 
       <div className="lane__footer">
-        <AddNew type="card" laneId={lane.id} onAdd={onNewCardAdd} />
+        <AddNew type="card" laneId={lane.id} />
       </div>
     </div>,
   )
@@ -32,7 +33,7 @@ const dropSpec = {
 
     const sourceCardId = monitor.getItem().cardId
 
-    if (lane.cards.length) return
+    if (lane.cardIds.length) return
 
     // Perform the move
     onCardMove(sourceCardId, lane.id)
@@ -45,4 +46,21 @@ function dropCollect(connect) {
   }
 }
 
-export default DropTarget(ItemTypes.CARD, dropSpec, dropCollect)(Lane)
+const DropTargetLane = DropTarget(ItemTypes.CARD, dropSpec, dropCollect)(Lane)
+
+// Connecting redux
+function mapDispatchToProps(dispatch) {
+  return {
+    onCardMove: (sourceCardId, laneId) => dispatch(doMoveCard(sourceCardId, laneId)),
+  }
+}
+
+function mapStateToProps(state, props) {
+  return {
+    lane: state.laneState.entities[props.laneId],
+  }
+}
+
+const ConnectedLane = connect(mapStateToProps, mapDispatchToProps)(DropTargetLane)
+
+export default ConnectedLane
