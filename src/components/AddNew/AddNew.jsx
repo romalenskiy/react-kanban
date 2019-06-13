@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import uuid from 'uuid/v4'
 
@@ -6,20 +6,21 @@ import { doAddLane } from '../../action_creators/lanes'
 import { doAddCard } from '../../action_creators/cards'
 
 import useControlledInput from '../../customHooks/useControlledInput'
+import useComponentFocused from '../../customHooks/usComponentFocused'
 
 import plusIcon from '../../assets/img/plusIcon.svg'
 import crossIcon from '../../assets/img/crossIcon.svg'
 
 function AddNew({ type, laneId, onAdd }) {
   const [value, setValue, isValueValid] = useControlledInput()
-  const [isAdding, setIsAdding] = useState(false)
+  const [focusComponentRef, isComponentFocused, setIsComponentFocused] = useComponentFocused(['click', 'drag'], () => setValue(''))
 
   function onAddNewClick() {
-    setIsAdding(true)
+    setIsComponentFocused(true)
   }
 
   function onAddNewClose() {
-    setIsAdding(false)
+    setIsComponentFocused(false)
     setValue('')
   }
 
@@ -69,9 +70,9 @@ function AddNew({ type, laneId, onAdd }) {
   }
 
   return (
-    isAdding
+    isComponentFocused
       ? (
-        <div className={`column add-new add-new_${type} add-new__form`}>
+        <div className={`column add-new add-new_${type} add-new__form`} ref={focusComponentRef}>
           {type === 'lane' ? <input className="box input add-new__input" type="text" {...textFieldProps} /> : <textarea className="box textarea add-new__textarea" rows="2" {...textFieldProps} />}
           <div className="row add-new__buttons">
             <button className="button add-new__button" type="button" disabled={!isValueValid} onClick={onAddNewFinish}>{`Добавить ${laneOrCardAccusative}`}</button>
