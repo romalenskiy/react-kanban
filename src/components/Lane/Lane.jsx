@@ -14,8 +14,8 @@ function Lane({ lane, connectDropTarget }) {
       <div className="lane__header">{lane.name}</div>
 
       <div className="lane__body">
-        {lane.cardIds.map((cardId) => {
-          return <Card key={cardId} cardId={cardId} />
+        {lane.cardIds.map((cardId, index) => {
+          return <Card key={cardId} cardId={cardId} cardIndex={index} />
         })}
       </div>
 
