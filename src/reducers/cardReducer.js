@@ -1,4 +1,5 @@
 import { CARD_ADD } from '../constants/actionTypes'
+import { cardsSeed } from '../constants/seeds'
 
 function applyAddCard(state, action) {
   const { cardId, task } = action.card
@@ -9,7 +10,7 @@ function applyAddCard(state, action) {
   return { ...state, entities, ids }
 }
 
-function cardReducer(state = { entities: {}, ids: [] }, action) {
+function cardReducer(state = cardsSeed, action) {
   switch (action.type) {
     case CARD_ADD: {
       return applyAddCard(state, action)

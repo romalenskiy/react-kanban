@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4'
 import { LANE_ADD, CARD_ADD, CARD_MOVE } from '../constants/actionTypes'
+import { lanesSeed } from '../constants/seeds'
 
 function applyAddLane(state, action) {
   const id = uuid()
@@ -76,7 +77,7 @@ function applyMoveCard(state, action) {
   return { ...state, entities }
 }
 
-function laneReducer(state = { entities: {}, ids: [] }, action) {
+function laneReducer(state = lanesSeed, action) {
   switch (action.type) {
     case LANE_ADD: {
       return applyAddLane(state, action)
