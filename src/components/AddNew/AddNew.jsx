@@ -6,7 +6,7 @@ import { doAddLane } from '../../action_creators/lanes'
 import { doAddCard } from '../../action_creators/cards'
 
 import useControlledInput from '../../customHooks/useControlledInput'
-import useComponentFocused from '../../customHooks/usComponentFocused'
+import useComponentFocused from '../../customHooks/useComponentFocused'
 
 import plusIcon from '../../assets/img/plusIcon.svg'
 import crossIcon from '../../assets/img/crossIcon.svg'
