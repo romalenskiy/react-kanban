@@ -1,12 +1,19 @@
-import React, { useRef, forwardRef, useImperativeHandle } from 'react'
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { connect } from 'react-redux'
 import { DragSource, DropTarget } from 'react-dnd'
+import { getEmptyImage } from 'react-dnd-html5-backend'
 
 import { doMoveCard } from '../../action_creators/lanes'
 import { ItemTypes } from '../../constants/dndTypes'
 
 const Card = forwardRef((props, ref) => {
-  const { task, connectDragSource, isDragging, connectDropTarget } = props
+  const { task, connectDragSource, connectDragPreview, isDragging, connectDropTarget } = props
+
+  // Use empty image as a drag preview so browsers don't draw it
+  // and we can draw whatever we want on the custom drag layer instead.
+  useEffect(() => {
+    connectDragPreview(getEmptyImage())
+  }, [])
 
   const cardRef = useRef()
   // Exposing node to parent element (DnD HOC)
@@ -84,15 +91,22 @@ function dropCollect(connect, monitor) {
 
 // Handling drag'n'drop
 const dragSpec = {
-  beginDrag(props) {
+  beginDrag(props, monitor, component) {
     const { cardId, cardIndex } = props
-    return { cardId, cardIndex }
+    const { height, width } = component.getNode().getBoundingClientRect()
+    return {
+      cardId,
+      cardIndex,
+      height,
+      width,
+    }
   },
 }
 
 function dragCollect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging(),
   }
 }
