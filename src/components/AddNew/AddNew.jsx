@@ -13,7 +13,7 @@ import crossIcon from '../../assets/img/crossIcon.svg'
 
 function AddNew({ type, laneId, onAdd }) {
   const [value, setValue, isValueValid] = useControlledInput()
-  const [focusComponentRef, isComponentFocused, setIsComponentFocused] = useComponentFocused(['click', 'drag'], () => setValue(''))
+  const [focusComponentRef, isComponentFocused, setIsComponentFocused] = useComponentFocused(['click', 'drag'], () => { setValue('') })
 
   function onAddNewClick() {
     setIsComponentFocused(true)
